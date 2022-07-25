@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  iot-smart-parking-database:
+    image: mariadb
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: ctx#ABC#37!
+      MYSQL_DATABASE: iot-smart-parking
+    ports:
+      - "3306:3306"
+
+  iot-smart-parking-service:
+    image: iot-smart-parking-service
+    restart: always
+    ports:
+      - "3000:3000"
+
+  iot-smart-parking-client:
+    image: iot-smart-parking-client
+    restart: always
+    ports:
+      - "8080:4200" 
