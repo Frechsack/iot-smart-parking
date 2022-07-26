@@ -10,6 +10,8 @@ services:
       MYSQL_DATABASE: iot-smart-parking
     ports:
       - "3306:3306"
+    volumes:
+      - ./database:/var/lib/mysql
 
   iot-smart-parking-service:
     container_name: iot-smart-parking-service
