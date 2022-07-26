@@ -2,6 +2,7 @@ version: '3.1'
 
 services:
   iot-smart-parking-database:
+    container_name: iot-smart-parking-database
     image: mariadb
     restart: always
     environment: 
@@ -11,13 +12,22 @@ services:
       - "3306:3306"
 
   iot-smart-parking-service:
+    container_name: iot-smart-parking-service
     image: iot-smart-parking-service
     restart: always
     ports:
       - "3000:3000"
 
   iot-smart-parking-client:
+    container_name: iot-smart-parking-client
     image: iot-smart-parking-client
     restart: always
     ports:
-      - "8080:4200" 
+      - "80:80"
+      
+  iot-smart-parking-mqtt-broker:
+    container_name: iot-smart-parking-broker
+    image: toke/mosquitto
+    restart: always
+    ports: 
+      - "1883:1883"
