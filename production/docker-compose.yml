@@ -6,7 +6,7 @@ services:
     image: mariadb
     restart: always
     environment: 
-      MYSQL_ROOT_PASSWORD: ctx#ABC#37!
+      MYSQL_ROOT_PASSWORD: etcuiaUanDEiuhjs61hjcvoijWQnjvcpq
       MYSQL_DATABASE: iot-smart-parking
     ports:
       - "3306:3306"
