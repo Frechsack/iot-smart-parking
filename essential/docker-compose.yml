@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  iot-smart-parking-database:
+    container_name: iot-smart-parking-database-essential
+    image: mariadb
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: ctx#ABC#37!
+      MYSQL_DATABASE: iot-smart-parking
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database:/var/lib/mysql
+      
+  iot-smart-parking-mqtt-broker:
+    container_name: iot-smart-parking-broker-essential
+    image: toke/mosquitto
+    restart: always
+    ports: 
+      - "1883:1883"
