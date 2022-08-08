@@ -15,7 +15,9 @@ services:
       
   iot-smart-parking-mqtt-broker:
     container_name: iot-smart-parking-broker-essential
-    image: toke/mosquitto
+    image: eclipse-mosquitto
     restart: always
     ports: 
       - "1883:1883"
+    volumes:
+      - mosquitto.conf:/mosquitto/config/mosquitto.conf
