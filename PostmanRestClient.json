@@ -65,7 +65,7 @@
 							"variable": [
 								{
 									"key": "mac",
-									"value": ""
+									"value": "PL_2"
 								}
 							]
 						}
@@ -127,6 +127,291 @@
 								{
 									"key": "mac",
 									"value": "DEVICE_1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "parking-lot",
+			"item": [
+				{
+					"name": "GetDevices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/parking-lot/:nr/devices?page=0&pageSize=20",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"parking-lot",
+								":nr",
+								"devices"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "20"
+								}
+							],
+							"variable": [
+								{
+									"key": "nr",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "accounts",
+			"item": [
+				{
+					"name": "GetPayments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/accounts/:email/plates/:plate/payments?page=0&pageSize=20",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"accounts",
+								":email",
+								"plates",
+								":plate",
+								"payments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "20"
+								}
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "tobias.reyinger@gmail.com"
+								},
+								{
+									"key": "plate",
+									"value": "FDBTR193"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/accounts/register?email=abc@.de&password=abc&street=Hanseweg&streetNr=17&zip=51674&firstname=Arnold&lastname=Schwazei",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"accounts",
+								"register"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "abc@.de"
+								},
+								{
+									"key": "password",
+									"value": "abc"
+								},
+								{
+									"key": "street",
+									"value": "Hanseweg"
+								},
+								{
+									"key": "streetNr",
+									"value": "17"
+								},
+								{
+									"key": "zip",
+									"value": "51674"
+								},
+								{
+									"key": "firstname",
+									"value": "Arnold"
+								},
+								{
+									"key": "lastname",
+									"value": "Schwazei"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/accounts/:email/update?password=abc&street=SchwarzenWech&streetNr=17&zip=51674&firstname=Arnold&lastname=Schwazei",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"accounts",
+								":email",
+								"update"
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "abc"
+								},
+								{
+									"key": "street",
+									"value": "SchwarzenWech"
+								},
+								{
+									"key": "streetNr",
+									"value": "17"
+								},
+								{
+									"key": "zip",
+									"value": "51674"
+								},
+								{
+									"key": "firstname",
+									"value": "Arnold"
+								},
+								{
+									"key": "lastname",
+									"value": "Schwazei"
+								}
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "abc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/accounts/:email/authenticate?password=abc",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"accounts",
+								":email",
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "abc"
+								}
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "abc@.de"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddLicensePlate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/accounts/:email/plates?plate=GMPW196",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"accounts",
+								":email",
+								"plates"
+							],
+							"query": [
+								{
+									"key": "plate",
+									"value": "GMPW196"
+								}
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "abc@.de"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteLicensePlate",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/accounts/:email/plates?plate=ABCDEF",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"accounts",
+								":email",
+								"plates"
+							],
+							"query": [
+								{
+									"key": "plate",
+									"value": "ABCDEF"
+								}
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "abc@.de"
 								}
 							]
 						}
