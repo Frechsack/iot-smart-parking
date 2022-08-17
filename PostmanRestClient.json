@@ -101,7 +101,7 @@
 							"variable": [
 								{
 									"key": "mac",
-									"value": ""
+									"value": "DEVICE_1"
 								}
 							]
 						}
@@ -144,13 +144,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}:{{PORT}}/parking-lot/:nr/devices?page=0&pageSize=20",
+							"raw": "{{HOST}}:{{PORT}}/parking-lots/:nr/devices?page=0&pageSize=20",
 							"host": [
 								"{{HOST}}"
 							],
 							"port": "{{PORT}}",
 							"path": [
-								"parking-lot",
+								"parking-lots",
 								":nr",
 								"devices"
 							],
@@ -227,14 +227,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}:{{PORT}}/accounts/register?email=abc@.de&password=abc&street=Hanseweg&streetNr=17&zip=51674&firstname=Arnold&lastname=Schwazei",
+							"raw": "{{HOST}}:{{PORT}}/accounts?email=abc@.de&password=abc&street=Hanseweg&streetNr=17&zip=51674&firstname=Arnold&lastname=Schwazei",
 							"host": [
 								"{{HOST}}"
 							],
 							"port": "{{PORT}}",
 							"path": [
-								"accounts",
-								"register"
+								"accounts"
 							],
 							"query": [
 								{
@@ -276,15 +275,14 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}:{{PORT}}/accounts/:email/update?password=abc&street=SchwarzenWech&streetNr=17&zip=51674&firstname=Arnold&lastname=Schwazei",
+							"raw": "{{HOST}}:{{PORT}}/accounts/:email?password=abc&street=SchwarzenWech&streetNr=17&zip=51674&firstname=Arnold&lastname=Schwazei",
 							"host": [
 								"{{HOST}}"
 							],
 							"port": "{{PORT}}",
 							"path": [
 								"accounts",
-								":email",
-								"update"
+								":email"
 							],
 							"query": [
 								{
@@ -315,7 +313,7 @@
 							"variable": [
 								{
 									"key": "email",
-									"value": "abc"
+									"value": "abc@.de"
 								}
 							]
 						}
@@ -355,41 +353,9 @@
 					"response": []
 				},
 				{
-					"name": "AddLicensePlate",
+					"name": "AddPlate",
 					"request": {
 						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}:{{PORT}}/accounts/:email/plates?plate=GMPW196",
-							"host": [
-								"{{HOST}}"
-							],
-							"port": "{{PORT}}",
-							"path": [
-								"accounts",
-								":email",
-								"plates"
-							],
-							"query": [
-								{
-									"key": "plate",
-									"value": "GMPW196"
-								}
-							],
-							"variable": [
-								{
-									"key": "email",
-									"value": "abc@.de"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteLicensePlate",
-					"request": {
-						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "{{HOST}}:{{PORT}}/accounts/:email/plates?plate=ABCDEF",
@@ -407,6 +373,62 @@
 									"key": "plate",
 									"value": "ABCDEF"
 								}
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePlate",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/accounts/:email/plates/:plate",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"accounts",
+								":email",
+								"plates",
+								":plate"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "abc@.de"
+								},
+								{
+									"key": "plate",
+									"value": "ABCDEF"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/accounts/:email",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"accounts",
+								":email"
 							],
 							"variable": [
 								{
