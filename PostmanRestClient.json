@@ -12,7 +12,13 @@
 					"name": "GetAll",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "bearer",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjA4NDI3NzcsImV4cCI6MTY2MDg0OTk3N30.1Bvjb7sybkk93NdlZqE5CfQU70rAK0N99QWIub-9guQ",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "{{HOST}}:{{PORT}}/devices?page=0&pageSize=2",
 							"host": [
@@ -40,7 +46,13 @@
 					"name": "GetStatus",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "BEARER",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjA4NDI3NzcsImV4cCI6MTY2MDg0OTk3N30.1Bvjb7sybkk93NdlZqE5CfQU70rAK0N99QWIub-9guQ",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "{{HOST}}:{{PORT}}/devices/:mac/status?page=0&pageSize=20",
 							"host": [
@@ -65,7 +77,7 @@
 							"variable": [
 								{
 									"key": "mac",
-									"value": "PL_2"
+									"value": "MOTION_1"
 								}
 							]
 						}
@@ -76,7 +88,13 @@
 					"name": "GetInstructions",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "BEARER",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjA4NDI3NzcsImV4cCI6MTY2MDg0OTk3N30.1Bvjb7sybkk93NdlZqE5CfQU70rAK0N99QWIub-9guQ",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "{{HOST}}:{{PORT}}/devices/:mac/instructions?page=0&pageSize=20",
 							"host": [
@@ -101,7 +119,7 @@
 							"variable": [
 								{
 									"key": "mac",
-									"value": "DEVICE_1"
+									"value": "MOTION_1"
 								}
 							]
 						}
@@ -142,7 +160,13 @@
 					"name": "GetDevices",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "BEARER",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjA4NDI3NzcsImV4cCI6MTY2MDg0OTk3N30.1Bvjb7sybkk93NdlZqE5CfQU70rAK0N99QWIub-9guQ",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "{{HOST}}:{{PORT}}/parking-lots/:nr/devices?page=0&pageSize=20",
 							"host": [
@@ -171,6 +195,14 @@
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
@@ -345,7 +377,7 @@
 							"variable": [
 								{
 									"key": "email",
-									"value": "abc@.de"
+									"value": "pw"
 								}
 							]
 						}
@@ -434,6 +466,63 @@
 								{
 									"key": "email",
 									"value": "abc@.de"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "plate-detection",
+			"item": [
+				{
+					"name": "Enter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/plate-detection/enter/:plate",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"plate-detection",
+								"enter",
+								":plate"
+							],
+							"variable": [
+								{
+									"key": "plate",
+									"value": "GMPW196"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/plate-detection/exit/:plate",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"plate-detection",
+								"exit",
+								":plate"
+							],
+							"variable": [
+								{
+									"key": "plate",
+									"value": ""
 								}
 							]
 						}
