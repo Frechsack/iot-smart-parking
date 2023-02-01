@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   iot-smart-parking-database:
-    container_name: iot-smart-parking-database
+    container_name: iot-smart-parking-database-production
     image: mariadb
     restart: always
     environment: 
@@ -13,25 +13,25 @@ services:
     volumes:
       - ./database:/var/lib/mysql
 
-  iot-smart-parking-service:
-    container_name: iot-smart-parking-service
-    image: iot-smart-parking-service
-    restart: always
-    ports:
-      - "3000:3000"
-
   iot-smart-parking-client:
-    container_name: iot-smart-parking-client
+    container_name: iot-smart-parking-client-production
     image: iot-smart-parking-client
     restart: always
     ports:
       - "80:80"
       
   iot-smart-parking-mqtt-broker:
-    container_name: iot-smart-parking-broker-essential
+    container_name: iot-smart-parking-broker-production
     image: eclipse-mosquitto
     restart: always
     ports: 
       - "1883:1883"
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  iot-smart-parking-overwatch:
+    container_name: iot-smart-parking-overwatch-production
+    image: iot-smart-parking-overwatch
+    restart: always
+    ports:
+      - "8080:8080"
