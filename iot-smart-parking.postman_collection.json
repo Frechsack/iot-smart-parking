@@ -202,7 +202,17 @@
 					"name": "Get",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/parking-lots",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"parking-lots"
+							]
+						}
 					},
 					"response": []
 				}
@@ -496,7 +506,7 @@
 							"variable": [
 								{
 									"key": "plate",
-									"value": "GMPW196"
+									"value": "GMTA654"
 								}
 							]
 						}
@@ -522,8 +532,128 @@
 							"variable": [
 								{
 									"key": "plate",
-									"value": ""
+									"value": "GMUI144"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "workflow",
+			"item": [
+				{
+					"name": "DirectInit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "key",
+								"value": "ghqwqe124",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"captures\": {\r\n        \"Virtual\": {\r\n            \"x\": 1,\r\n            \"y\": 2,\r\n            \"width\": 800,\r\n            \"height\": 400\r\n        }\r\n    },\r\n    \"zones\": {\r\n        \"1\": {\r\n            \"offsetX\": 0,\r\n            \"offsetY\": 0,\r\n            \"width\": 800,\r\n            \"height\": 400,\r\n            \"deviceName\": \"Virtual\"\r\n        },\r\n         \"2\": {\r\n            \"offsetX\": 0,\r\n            \"offsetY\": 0,\r\n            \"width\": 800,\r\n            \"height\": 400,\r\n            \"deviceName\": \"Virtual\"\r\n        },\r\n         \"3\": {\r\n            \"offsetX\": 0,\r\n            \"offsetY\": 0,\r\n            \"width\": 800,\r\n            \"height\": 400,\r\n            \"deviceName\": \"Virtual\"\r\n        },\r\n         \"4\": {\r\n            \"offsetX\": 0,\r\n            \"offsetY\": 0,\r\n            \"width\": 800,\r\n            \"height\": 400,\r\n            \"deviceName\": \"Virtual\"\r\n        },\r\n         \"5\": {\r\n            \"offsetX\": 0,\r\n            \"offsetY\": 0,\r\n            \"width\": 800,\r\n            \"height\": 400,\r\n            \"deviceName\": \"Virtual\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Init",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "BEARER",
+								"value": "ghqwqe124",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"captures\": {\r\n        \"Virtual\": {\r\n            \"x\": 1,\r\n            \"y\": 2,\r\n            \"width\": 800,\r\n            \"height\": 400\r\n        }\r\n    },\r\n    \"zones\": {\r\n        \"1\": {\r\n            \"offsetX\": 0,\r\n            \"offsetY\": 0,\r\n            \"width\": 800,\r\n            \"height\": 400,\r\n            \"deviceName\": \"Virtual\"\r\n        },\r\n         \"2\": {\r\n            \"offsetX\": 0,\r\n            \"offsetY\": 0,\r\n            \"width\": 800,\r\n            \"height\": 400,\r\n            \"deviceName\": \"Virtual\"\r\n        },\r\n         \"3\": {\r\n            \"offsetX\": 0,\r\n            \"offsetY\": 0,\r\n            \"width\": 800,\r\n            \"height\": 400,\r\n            \"deviceName\": \"Virtual\"\r\n        },\r\n         \"4\": {\r\n            \"offsetX\": 0,\r\n            \"offsetY\": 0,\r\n            \"width\": 800,\r\n            \"height\": 400,\r\n            \"deviceName\": \"Virtual\"\r\n        },\r\n         \"5\": {\r\n            \"offsetX\": 0,\r\n            \"offsetY\": 0,\r\n            \"width\": 800,\r\n            \"height\": 400,\r\n            \"deviceName\": \"Virtual\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/workflow/parking-guide",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"workflow",
+								"parking-guide"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DirectComputedImage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "key",
+								"value": "ghqwqe124",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ComputedImage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "bearer",
+								"value": "",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}:{{PORT}}/workflow/parking-guide",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"workflow",
+								"parking-guide"
 							]
 						}
 					},
@@ -562,6 +692,12 @@
 			"key": "PORT",
 			"value": "3000",
 			"type": "default"
+		},
+		{
+			"key": "BEARER",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjA4NDI2NDgsImV4cCI6MTY2MDg0OTg0OH0.Ed2wbeIyfPm1DIsRvB2ny0RzQg27ClSPDJpglv2rnyc",
+			"type": "default",
+			"disabled": true
 		}
 	]
 }
