@@ -21,10 +21,3 @@ services:
       - "1883:1883"
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-      
-  iot-smart-parking-overwatch:
-    container_name: iot-smart-parking-overwatch-essential
-    image: iot-smart-parking-overwatch
-    restart: always
-    ports:
-      - "8080:8080"
