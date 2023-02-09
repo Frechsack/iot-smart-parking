@@ -1,0 +1,11 @@
+[Unit]
+Description=Overwatch autostart
+After=docker.service
+
+[Service]
+Type=simple
+User=root
+ExecStart=docker run --device /dev/video0 iot-smart-parking-overwatch --name iot-smart-parking-overwatch
+
+[Install]
+WantedBy=multi-user.target
