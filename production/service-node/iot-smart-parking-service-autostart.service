@@ -5,7 +5,9 @@ After=docker.service
 [Service]
 Type=simple
 User=root
-ExecStart=docker run --device /dev/video0 iot-smart-parking-overwatch --name iot-smart-parking-overwatch
+WorkingDirectory=/home/remote/iot-smart-parking-service
+ExecStart=npm start
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
