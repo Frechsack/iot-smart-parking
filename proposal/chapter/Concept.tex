@@ -1,0 +1,42 @@
+\chapter{Concept}
+\section{Requirements}
+In order to be applicable in a real world scenario, the concept has to met several requirements. We defined those requirements based on the functional requirement style from "die~SOPHISTen"\footcite[][220]{dbh.79817158820140101}:
+\begin{itemize}
+    \item The system must work without any human action during the entrance and exit of cars into and of the parking garage. 
+    \item The system must be able to identify incoming cars based on their license plate and verify if those are permitted to enter the parking garage.
+    \item The system must be integrated into an existing fire protection system.
+    \item The system must protocol the entrance and exit of cars.
+    \item The system must be scaleable enough to fit the size of the parking garage.
+    \item The system should be able to guide a car within the parking garage to the nearest available parking lot.
+    \item The system should be easily extendable based on an event system.
+\end{itemize}
+
+\section{Component-diagram}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{assets/ConceptComponents.png}
+    \caption{Concept component-diagram}
+    \label{fig:Concept component-diagram}
+\end{figure}
+
+\section{Components}
+\par
+Since the dimensions of the system are depending on the size of the parking garage and amount of sensors, the system should be scaleable in a modular design.
+The key components are the following:
+
+\begin{table}[H]
+    \begin{tabular}{p{0.2\linewidth} p{0.72\linewidth}}
+        \rowcolor{TableHeaderClr}
+        \hline
+        \textbf{Component} & \textbf{Use case} \\
+        \hline
+        Sensors & The sensors are any device used to control the garage. Those could be sensors to check if a parking lot is in use, lights for the parking guide system or entry or exit barriers. \\
+        Connector & The connector allows a communication between the sensors and other components. The connector uses a protocol that is understood by the sensors and the service as well. It is assumed a common protocol like HTTP or MQTT is used. The connector must provide an interface that allows to send and recive messages. \\
+        Service & The service is the central processing unit in the garage. It analysis every sensor data in the garage and instructs those. The service receives sensor data over the connector and sends instructions to the individual sensors over it as well. It provides an API to interact with an administration client. The service should contain multiple sub-components to handle license-plate detection and object recognition in the garage.\\
+        Database & The database is used by the service to log data received by the sensors and store operational data. The data could later be used for analysis.\\
+        Client & The client allows to access and administrate the service. This could be dedicated application or web-client.\\
+        \hline
+        \end{tabular}
+    \caption{Component descriptions}
+    \label{tab:my_label}
+\end{table}

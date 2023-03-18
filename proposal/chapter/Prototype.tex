@@ -1,0 +1,116 @@
+\chapter{Prototype}
+The concept has been implemented in a prototype. The prototype consists of a parking garage with 6 parking lots. To prove the system is easy extendable, the prototype contains a clock that can play an animation if an authenticated car enters the parking garage. 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.6265\textwidth}
+        \includegraphics[width=\textwidth]{assets/OverviewHorizontal.jpg}     
+    \end{subfigure}
+    \begin{subfigure}{0.3525\textwidth}
+        \includegraphics[width=\textwidth]{assets/OverviewVertical.jpg}   
+    \end{subfigure}
+    \caption{Prototype overview}
+    \label{fig:Overview}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.325\textwidth}
+         \includegraphics[width=\textwidth]{assets/DriveInVertical.jpg}     
+    \end{subfigure}
+    \begin{subfigure}{0.325\textwidth}
+        \includegraphics[width=\textwidth]{assets/ParkingGuideVertical.jpg}  
+    \end{subfigure}
+     \begin{subfigure}{0.325\textwidth}
+        \includegraphics[width=\textwidth]{assets/AktiveCarVertical.jpg}   
+    \end{subfigure}
+    \caption{Prototype car entrance}
+    \label{fig:Entrance of car}
+\end{figure}
+
+\section{Component-diagram}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{assets/ImplementationComponents.png}
+    \caption{Implementation component-diagram}
+    \label{fig:Implementation component-diagram}
+\end{figure}
+
+\section{Components}
+To keep costs down, sensors without network access were used. To connect those sensors with the local network, they are connected to an Arduino Mega 2560. 
+
+\begin{table}[H]
+    \begin{tabular}{p{0.15\linewidth} p{0.17\linewidth} p{0.6\linewidth}}
+        \rowcolor{TableHeaderClr}
+        \hline
+        \textbf{Component} & \textbf{Technology} & \textbf{Notes} \\
+        \hline
+        Sensors & C++ & The sensors are common micro-controller parts like leds, servo motor or line sensors. Unlike in the concept, those sensors can not communicate directly with the connector. The are connected to an Arduino Mega. The Arduino is connected to the connector and translates the between the sensors and the protocol used by the connector. \\
+        Connector & Eclipse Mosquitto\footcite[][]{eclipseMosquitto} & The connector is based on Eclipse Mosquitto and uses the MQTT protocol. The reason to use MQTT instead of HTTP, is the lower bandwidth used by the protocol.  \\
+        Database & MariaDB\footcite[][]{mariaDB} & MariaDB is a fork of MySQL\footcite[][]{mysql} and is the default relational database in most gnu linux distributions. \\
+        Service & Node.js, NestJS\footcite[][]{nestJS}, OpenAlpr\footcite[][]{openAlpr}, Java, OpenCV\footcite[][]{openCv} & The service component is split into three sub-components. The overwatch is responsible for the image manipulation required for the parking guide system. The overwatch is connected to a camera to identify moving objects in the garage. The component is implemented in Java with OpenCV bindings\footcite[][]{openCvJavaBinding} for high performance image processing. The overwatch and the service communicate over HTTP with each other. For the license-plate detection we used the already existing open source implementation OpenAlpr. The service can launch instances of OpenAlpr directly as operating system sub-processes. The service itself is implemented in Node.js using the NestJS framework. \\         
+        Client & Angular, nginx\footcite[][]{nginx} & The client is realised as a web-client. The frontend is written in Angular. The website is served on a nginx web-server. \\
+        \hline
+        \end{tabular}
+    \caption{Component implementations}
+    \label{tab:my_label}
+\end{table}
+\pagebreak
+
+\section{Hardware components}
+\begin{table}[H]
+    \begin{tabular}{p{0.22\linewidth} p{0.1\linewidth} p{0.6\linewidth}}
+        \rowcolor{TableHeaderClr}
+        \hline
+        \textbf{Component} & \textbf{Amount} & \textbf{Use-case}\\
+        \hline
+        Line sensors & 6 & The line sensors are used to identify if a parking lot is in use or not.\\
+        LEDs & 10 & The LEDs are required for the parking guide system. They are positioned on the ground. A car can follow those light to find an available parking lot.\\
+        Servo motor & 2 & The motors are used for the entrance and exit barrier. They will open the entrance or exit if an authenticated car was recognised.\\
+        Co2 sensor & 1 & The sensor data is used to trigger an alarm. The alarm will activate a siren and open any barriers.\\
+        Siren & 1 & A siren that activates during the alarm.\\
+        7-Segment display & 1 & The display shows the current amount of available parking lots in the garage.\\
+        Diode & 2 & A green and red diode symbolize the status of the garage. If parking lots are available, the green one is blinking. If no parking lot is available, the red one is blinking.\\
+        USB-camera & 3 & Two USB-cameras are used to observe the entrance and exit of the garage. A third one is positioned on top of the garage used by the overwatch for object recognition.\\
+        Arduino Mega 2560\footcite[][]{arduinoMega} & 1 & Every sensor is connected to an Arduiono Mega. The Arduino Mega translates between the MQTT protocol and the sensors.\\
+        Raspberry Pi 400\footcite[][]{raspberryPi400} & 2 & The Raspberry Pis host the database, the client and the service. A single Raspberry Pi 400 does not have enough capacity to run all service sub-components alone. Since the service sub-components are connected over HTTP, they can be split up to multiple hosts. \\
+        WiFi router & 1 & A WiFi router is needed to connect the Arduino Mega and two Raspberry Pi 400 with each other.\\
+        \hline
+        \end{tabular}
+    \caption{Hardware components}
+    \label{tab:Hardware components}
+\end{table}
+
+\section{Modularity}
+The system was designed with modularity in mind. To extend the system, other components can easily connect to the connector and exchange data.
+
+\par
+This prototype is extended by a real time clock, that displays the amount of available parking slots. When an authenticated car enters the garage, the clock will play an animation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{assets/ClockHorizontal.png}
+    \caption{RTC-clock}
+    \label{fig:Real time clock}
+\end{figure}
+
+\section{Parking guide system}
+The parking guide system is controlled by the overwatch. In our prototype the overwatch is connected to a single USB camera which observes the garage from the top. The current implementation supports multiple cameras, in case a single one can not observe the whole garage.
+\par
+The overwatch splits the garage into multiple virtual zones. If an object is detected in a zone, the system will determinate the nearest available parking lot to this zone based on a priority. 
+The system has the information, which zone should be accessed next, in order to go from zone A to zone B. 
+The camera for the object detection is mounted static. That means a static background subtraction method can be used for the object detection. The background subtraction is done in OpenCV.\footcite[][]{backgroundSubtraction} The zone clustering and processing is done in Java.
+The algorithm works in the following steps:
+\begin{enumerate}
+    \item An object is detected in a zone. This zone will be called "start".
+    \item Based on the start zone, the system will determinate the nearest available parking lot based on a priority depending on the start zone. Since each parking lot is located in a zone, the system will navigate the object to that zone. That tone is called "target".
+    \item Depending on the "start" and "target" zone, the system will determinate which zone should be accessed next, based on predefined routing tables. The zone that should be access next is called "next".
+    \item The system will activate every parking guide lamp within the zones "start" and "next".
+    \item The algorithm will be repeated, until the "start" and "target" zone are equal.
+\end{enumerate}
+\begin{figure}
+    \centering
+    \includegraphics{assets/ParkingGuideSystem.png}
+    \caption{Parking guide system visualisation}
+    \label{fig:Parking guide system visualisation}
+\end{figure}
